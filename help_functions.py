@@ -1,19 +1,17 @@
 import copy
 
+
 def print_grid(grid):
+    """ Prints a given grid, replacing the numbers with letters. """
     grid_copy = copy.deepcopy(grid)
-    matrix = [[' ' if element == 0 else 'X' if element == 1 else 'O' for element in row] for row in grid_copy]
+    matrix = [[' ' if element == 0 else 'X' if element == 1 else 'o' for element in row] for row in grid_copy]
     for row in matrix:
         print(row)
 
 
-
-
-
-
 def all_same_in_sub_lst(lst, len_of_sublist):
     """ Returns True if all elements in any sublist of length len_of_sublist in
-        a lst are the same (if elements not all zeros). Else returns False """
+        a lst are the same (if elements not all zeros). Else returns False. """
     for i, element in enumerate(lst[0:len(lst) - (len_of_sublist - 1)]):
         sub_lst = lst[i:min(i + len_of_sublist, len(lst))]
         if len(set(sub_lst)) == 1 and 0 not in set(sub_lst) and len(lst) > (len_of_sublist - 1):
@@ -34,10 +32,9 @@ def empty_cells(grid):
 
 def obvious(max_adjacent, grid):
     """ Checks for rows, columns and diagonals that have max_adjacent - 1 in
-        a row.
-        If they have three in a row, return a modified grid with the opposite
-        number of the number that had three in a row. Else return the original
-        grid """
+        a row. If they have max_adjacent - 1 in a row, return a modified grid
+        with the opposite number of the number that had three in a row.
+        Else return the original grid """
     modified_grid = copy.deepcopy(grid)
     empty_indices_modified_grid = empty_cells(modified_grid)
     not_valid_cells = []
@@ -63,7 +60,6 @@ def obvious(max_adjacent, grid):
         if len1 == len2:
             break
 
-    print(f"obvious: not_valid_cells: {not_valid_cells}")
     return modified_grid
 
 
@@ -95,7 +91,7 @@ def generate_combinations(empty_indices):
 
         # Convert the binary string to integers
         for bit in binary_str:
-            if bit == 0:
+            if bit == '0':
                 binary_list.append(1)
             else:
                 binary_list.append(2)
