@@ -37,31 +37,29 @@ def obvious(max_adjacent, grid):
         Else return the original grid """
     modified_grid = copy.deepcopy(grid)
     empty_indices_modified_grid = empty_cells(modified_grid)
-    not_valid_cells = []
+
     len1 = len(empty_indices_modified_grid)
 
     while True:
         len2 = len1
         for index in empty_indices_modified_grid:
 
-            is_cell_valid_one = is_valid(1, 4, index, modified_grid)
-            is_cell_valid_two = is_valid(2, 4, index, modified_grid)
+            is_cell_valid_one = is_valid(1, max_adjacent, index, modified_grid)
+            is_cell_valid_two = is_valid(2, max_adjacent, index, modified_grid)
 
-            if not is_cell_valid_one:
-                modified_grid[index[0]][index[1]] = 2
+            if not is_cell_valid_one or not is_cell_valid_two:
+                modified_grid[index[0]][index[1]] = 2 if not is_cell_valid_one else 1
                 empty_indices_modified_grid = empty_cells(modified_grid)
                 len2 = len(empty_indices_modified_grid)
-                not_valid_cells.append((index[0], index[1]))
-            if not is_cell_valid_two:
-                modified_grid[index[0]][index[1]] = 1
-                empty_indices_modified_grid = empty_cells(modified_grid)
-                len2 = len(empty_indices_modified_grid)
-                not_valid_cells.append((index[0], index[1]))
+
+
+
 
         if len1 == len2:
             break
 
     return modified_grid
+
 
 
 def generate_combinations(empty_indices):
