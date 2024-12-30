@@ -43,6 +43,7 @@ def obvious(max_adjacent, grid):
     while True:
         len2 = len1
         for index in empty_indices_modified_grid:
+
             is_cell_valid_one = is_valid(1, 4, index, modified_grid)
             is_cell_valid_two = is_valid(2, 4, index, modified_grid)
 
@@ -63,18 +64,9 @@ def obvious(max_adjacent, grid):
     return modified_grid
 
 
-
-
-
-
-
-
-
-
-
 def generate_combinations(empty_indices):
     """ Generates combinations of 1s and 2s in the empty cells.
-    Returns a list of lists with all combinations"""
+        Returns a list of lists with all combinations """
     number_of_empty_cells = len(empty_indices)
 
     # Calculate n as 2^bit_length
@@ -95,31 +87,15 @@ def generate_combinations(empty_indices):
                 binary_list.append(1)
             else:
                 binary_list.append(2)
+
         binary_numbers.append(binary_list)
 
     return binary_numbers
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def is_grid_valid(max_adjacent, grid):
     """ Checks if a whole grid is valid. Returns True if it's valid,
-    else returns False """
+        else returns False. """
     for i, row in enumerate(grid):
         for j, num in enumerate(row):
             if not is_valid(grid[i][j], max_adjacent, (i,j), grid):
@@ -131,8 +107,7 @@ def is_grid_valid(max_adjacent, grid):
 def is_valid(attempt, max_adjacent, index, grid):
     """ Check if a row, column and diagonals are valid after an attempt for
         the particular index.
-        Returns True if it's valid, else returns False.
-        """
+        Returns True if it's valid, else returns False. """
     test_grid = copy.deepcopy(grid)
     row, col = index[0], index[1]
     num_rows = len(test_grid)
