@@ -28,10 +28,10 @@ inp_matrix = [[1, 1, 0, 1, 2, 1, 2, 1],
               [2, 0, 2, 0, 0, 0, 1, 1],
               [1, 2, 2, 0, 1, 0, 1, 0],]
 
-test_matrix = [[0, 0, 0, 1, 1, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
-               [0, 0, 0, 0, 0, 0, 0, 0],
+test_matrix = [[0, 0, 1, 1, 1, 0, 0, 0],
+               [0, 0, 0, 1, 0, 0, 0, 0],
+               [0, 0, 1, 0, 1, 0, 0, 0],
+               [0, 0, 1, 0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,7 +39,10 @@ test_matrix = [[0, 0, 0, 1, 1, 0, 0, 0],
               ]
 
 
-test_index = (0,0)
+test_index = (3,6)
+
+
+
 # print(hf.empty_cells(inp_matrix))
 #print(hf.is_grid_valid(inp_matrix))
 
@@ -53,8 +56,8 @@ test_index = (0,0)
 # empty_indices = hf.empty_cells(inp_matrix)
 # print(hf.obvious(inp_matrix))
 
-valid_2 = hf.is_valid_2(1,4, test_index, test_matrix)
-print(valid_2)
+valid = hf.is_valid(1,4, test_index, test_matrix)
+print(valid)
 
 
 
