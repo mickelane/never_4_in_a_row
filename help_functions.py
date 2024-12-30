@@ -1,8 +1,13 @@
 import copy
 
 def print_grid(grid):
-    for row in grid:
+    grid_copy = copy.deepcopy(grid)
+    matrix = [[' ' if element == 0 else 'X' if element == 1 else 'O' for element in row] for row in grid_copy]
+    for row in matrix:
         print(row)
+
+
+
 
 
 
@@ -36,51 +41,30 @@ def obvious(max_adjacent, grid):
     modified_grid = copy.deepcopy(grid)
     empty_indices_modified_grid = empty_cells(modified_grid)
     not_valid_cells = []
+    len1 = len(empty_indices_modified_grid)
 
+    while True:
+        len2 = len1
+        for index in empty_indices_modified_grid:
+            is_cell_valid_one = is_valid(1, 4, index, modified_grid)
+            is_cell_valid_two = is_valid(2, 4, index, modified_grid)
 
-    for index in empty_indices_modified_grid:
-        bool_lst = is_valid(3, index, modified_grid)
-        if False in bool_lst:
-            pass
+            if not is_cell_valid_one:
+                modified_grid[index[0]][index[1]] = 2
+                empty_indices_modified_grid = empty_cells(modified_grid)
+                len2 = len(empty_indices_modified_grid)
+                not_valid_cells.append((index[0], index[1]))
+            if not is_cell_valid_two:
+                modified_grid[index[0]][index[1]] = 1
+                empty_indices_modified_grid = empty_cells(modified_grid)
+                len2 = len(empty_indices_modified_grid)
+                not_valid_cells.append((index[0], index[1]))
 
+        if len1 == len2:
+            break
 
-
-
-
-
-
-
-    return not_valid_cells
-
-
-
-
-# def generate_combinations(empty_indices):
-#     """ Generates combinations of 1s and 2s in the empty cells.
-#     Returns a list of lists with all combinations"""
-#     number_of_empty_cell = len(empty_indices)
-#
-#     # Calculate n as 2^bit_length
-#     n = 2 ** number_of_empty_cell
-#     binary_numbers = []
-#
-#     # Loop through numbers from 0 to n-1
-#     for i in range(n):
-#         binary_list = []
-#
-#         # Convert the number to binary, strip the '0b' prefix, and pad with
-#         # leading zeros to make it 'bit_length' digits long.
-#         binary_str = bin(i)[2:].zfill(number_of_empty_cell)
-#
-#         # Convert the binary string to integers
-#         for bit in binary_str:
-#             if bit == 0:
-#                 binary_list.append(1)
-#             else:
-#                 binary_list.append(2)
-#         binary_numbers.append(binary_list)
-#
-#     return binary_numbers
+    print(f"obvious: not_valid_cells: {not_valid_cells}")
+    return modified_grid
 
 
 
@@ -92,6 +76,32 @@ def obvious(max_adjacent, grid):
 
 
 
+def generate_combinations(empty_indices):
+    """ Generates combinations of 1s and 2s in the empty cells.
+    Returns a list of lists with all combinations"""
+    number_of_empty_cells = len(empty_indices)
+
+    # Calculate n as 2^bit_length
+    n = 2 ** number_of_empty_cells
+    binary_numbers = []
+
+    # Loop through numbers from 0 to n-1
+    for i in range(n):
+        binary_list = []
+
+        # Convert the number to binary, strip the '0b' prefix, and pad with
+        # leading zeros to make it 'bit_length' digits long.
+        binary_str = bin(i)[2:].zfill(number_of_empty_cells)
+
+        # Convert the binary string to integers
+        for bit in binary_str:
+            if bit == 0:
+                binary_list.append(1)
+            else:
+                binary_list.append(2)
+        binary_numbers.append(binary_list)
+
+    return binary_numbers
 
 
 
@@ -100,15 +110,26 @@ def obvious(max_adjacent, grid):
 
 
 
-# def is_grid_valid(max_adjacent, grid):
-#     """ Checks if a whole grid is valid. Returns True if it's valid,
-#     else returns False """
-#     for i, row in enumerate(grid):
-#         for j, num in enumerate(row):
-#             if not is_valid(max_adjacent, (i,j), grid):
-#                 return False
-#
-#     return True
+
+
+
+
+
+
+
+
+
+
+
+def is_grid_valid(max_adjacent, grid):
+    """ Checks if a whole grid is valid. Returns True if it's valid,
+    else returns False """
+    for i, row in enumerate(grid):
+        for j, num in enumerate(row):
+            if not is_valid(grid[i][j], max_adjacent, (i,j), grid):
+                return False
+
+    return True
 
 
 def is_valid(attempt, max_adjacent, index, grid):
