@@ -52,14 +52,10 @@ def obvious(max_adjacent, grid):
                 empty_indices_modified_grid = empty_cells(modified_grid)
                 len2 = len(empty_indices_modified_grid)
 
-
-
-
         if len1 == len2:
             break
 
     return modified_grid
-
 
 
 def generate_combinations(empty_indices):
