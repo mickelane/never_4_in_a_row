@@ -3,6 +3,7 @@
     No row, column or diagonal can contain 4 or more o or x in a row.
     This solution is not very effective. Many calculations must be done. """
 
+#   Example:
 #   x   x   _   x   o   x   o   x
 #   x   _   _   _   x   _   _   x
 #   _   _   o   _   _   _   o   x
